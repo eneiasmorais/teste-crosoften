@@ -1,5 +1,6 @@
 import { AppError } from "../errors/app.error";
 import { Request, Response, NextFunction } from "express";
+import "express-async-errors";
 
 export const errorHandler = (
   err: Error,
@@ -12,6 +13,7 @@ export const errorHandler = (
       message: err.message,
     });
   }
+  console.error(err);
 
   return res.status(400).json({
     message: err.message,

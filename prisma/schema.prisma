@@ -11,19 +11,31 @@ datasource db {
 }
 
 model User {
-  id       String @id
+  id       String @id @default(uuid())
   name     String
-  email    String
+  email    String @unique
   password String
+  Task     Task[]
 
   @@map("users")
 }
 
 model Task {
-  id          String  @id
+  id          String     @id
   title       String
   description String
-  status      Boolean
+  status      TaskStatus
+  userId      String
+  user        User       @relation(fields: [userId], references: [id])
+
+  subtasks Task[]  @relation("subtasks")
+  task     Task?   @relation("subtasks", fields: [taskId], references: [id]) //referência da task pai
+  taskId   String? // id da task pai
 
   @@map("tasks")
+}
+
+enum TaskStatus {
+  CONCLUIDA
+  NAO_CONCLUIDA
 }
