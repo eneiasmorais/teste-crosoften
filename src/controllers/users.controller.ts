@@ -61,4 +61,4 @@ usersController.post(
   }
 );
 
-module.exports = { usersController };
+export default usersController;

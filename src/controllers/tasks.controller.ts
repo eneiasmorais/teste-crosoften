@@ -72,4 +72,4 @@ class TaskController {
   }
 }
 
-export { TaskController };
+export default new TaskController();
